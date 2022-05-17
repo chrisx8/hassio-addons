@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Initialize builds
     outputs:
-      addons: ${{ steps.addons.outputs.addons }}
+      addons_list: ${{ steps.addons.outputs.addons_list }}
     steps:
       - name: Check out the repository
         uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
     name: Build ${{ matrix.addon }} (${{ matrix.arch }})
     strategy:
       matrix:
-        addon: ${{ fromJson(needs.init.outputs.addons) }}
+        addon: ${{ fromJson(needs.init.outputs.addons_list) }}
         arch: ["aarch64", "amd64", "armhf", "armv7", "i386"]
     steps:
       - name: Check out repository

@@ -1,7 +1,7 @@
 name: builder (test)
 env:
   BUILD_ARGS: "--test"
-  MONITORED_FILES: ".github/workflows build.yaml config.yaml Dockerfile rootfs"
+  MONITORED_FILES: "build.yaml config.yaml Dockerfile rootfs"
 on:
   push:
     branches-ignore:
