@@ -1,5 +1,7 @@
 # Chris's Home Assistant Add-ons
 
+[![builder](https://github.com/chrisx8/home-assistant-addons/actions/workflows/build.yaml/badge.svg)](https://github.com/chrisx8/home-assistant-addons/actions/workflows/build.yaml)
+
 This repository contains Home Assistant add-ons maintained by [chrisx8](https://github.com/chrisx8).
 
 ## Add-ons in this repository
