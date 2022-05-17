@@ -15,7 +15,7 @@ by [Franck Nijhof](https://github.com/frenck).
 
 ## License
 
-[MIT License](LICENSE)
+[MIT License](https://github.com/chrisx8/home-assistant-addons/blob/main/tailscale/LICENSE)
 
 ```
 Copyright (c) 2021-2022 Franck Nijhof

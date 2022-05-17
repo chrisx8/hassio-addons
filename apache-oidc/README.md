@@ -5,6 +5,6 @@ powered by [mod-auth-openidc](https://github.com/zmartzone/mod_auth_openidc).
 
 ## License
 
-[MIT License](LICENSE)
+[MIT License](https://github.com/chrisx8/home-assistant-addons/blob/main/apache-oidc/LICENSE)
 
 Copyright (c) 2022 Chris Xiao
