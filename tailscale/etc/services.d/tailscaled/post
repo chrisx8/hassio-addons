@@ -1,0 +1,55 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Runs after the machine has been logged in into the Tailscale network
+# ==============================================================================
+declare -a addresses
+declare -a routes
+declare ipinfo
+
+# Find addresses from which we can extract routes can be advertised
+addresses+=($(bashio::network.ipv4_address || true))
+addresses+=($(bashio::network.ipv6_address || true))
+routes=()
+
+for address in "${addresses[@]}"; do
+  if bashio::var.has_value "${address}"; then
+    # Skip local link addresses
+    if [[ "${address:0:6}" == "fe80::" ]] || [[ "${address:0:8}" == "169.254." ]];
+    then
+      continue
+    fi
+
+    # Skip if forwarding for the address family is disabled
+    if [[ "${address}" =~ .*:.* ]];
+    then
+      [[ $(</proc/sys/net/ipv6/conf/all/forwarding) -eq 0 ]] && continue
+    else
+      [[ $(</proc/sys/net/ipv4/ip_forward) -eq 0 ]] && continue
+    fi
+
+    ipinfo="$(/usr/bin/ipcalc --json "${address}")"
+    routes+=($(bashio::jq "${ipinfo}" '.NETWORK + "/" + .PREFIX'))
+  fi
+done
+
+# Wait for socket to be available
+while ! bashio::fs.socket_exists "/var/run/tailscale/tailscaled.sock";
+do
+  sleep 1
+done
+
+# Wait for the network to be available and logged in
+while true;
+do
+  if /opt/tailscale status --json --peers false --self false \
+    | jq --exit-status '.BackendState == "Running" or .BackendState == "NeedsLogin"';
+  then
+    IFS=","
+    /opt/tailscale up \
+      --hostname "$(bashio::info.hostname)" \
+      --advertise-routes "${routes[*]}" \
+    bashio::exit.ok
+  fi
+  # Well... wait a bit more
+  sleep 2
+done
