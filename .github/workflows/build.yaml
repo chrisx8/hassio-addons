@@ -100,10 +100,10 @@ jobs:
         with:
           github-token: ${{ secrets.GHCR_DELETE_TOKEN }}
           script: |
-            const response = await github.request("GET /user/packages/container/hassio-addon-${{ matrix.addon }}/versions");
+            const response = await github.request("GET /user/packages/container/hassio-${{ matrix.addon }}-${{ matrix.arch }}/versions");
             for(version of response.data) {
                 if (version.metadata.container.tags.length == 0) {
-                    const deleteResponse = await github.request("DELETE /user/packages/container/hassio-addon-${{ matrix.addon }}/versions/" + version.id, { });
+                    const deleteResponse = await github.request("DELETE /user/packages/container/hassio-${{ matrix.addon }}-${{ matrix.arch }}/versions/" + version.id, { });
                     console.log("[status] " + deleteResponse.status);
                     console.log("Deleted version " + version.id);
                 }
