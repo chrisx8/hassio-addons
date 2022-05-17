@@ -1,7 +1,7 @@
 name: builder
 env:
   BUILD_ARGS: ""
-  MONITORED_FILES: "build.yaml config.yaml Dockerfile rootfs"
+  MONITORED_FILES: ".github/workflows build.yaml config.yaml Dockerfile rootfs"
 on:
   push:
     branches:
@@ -73,9 +73,6 @@ jobs:
           if [[ "${{ steps.info.outputs.architectures }}" =~ ${{ matrix.arch }} ]]; then
              echo "::set-output name=build_arch::true";
              echo "::set-output name=image::$(echo ${{ steps.info.outputs.image }} | cut -d'/' -f3)";
-             if [[ -z "${{ github.head_ref }}" ]] && [[ "${{ github.event_name }}" == "push" ]]; then
-                 echo "BUILD_ARGS=" >> $GITHUB_ENV;
-             fi
            else
              echo "${{ matrix.arch }} is not a valid arch for ${{ matrix.addon }}, skipping build";
              echo "::set-output name=build_arch::false";
