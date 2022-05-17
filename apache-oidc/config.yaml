@@ -1,0 +1,42 @@
+name: Apache with mod-auth-openidc
+version: 2022.05.0
+slug: apache-oidc
+image: "ghcr.io/chrisx8/hassio-addon-apache-oidc"
+description: Apache web server & reverse proxy with mod-auth-openidc
+url: https://github.com/chrisx8/home-assistant-addons/tree/main/apache-oidc
+hassio_api: true
+init: false
+startup: services
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+map:
+  - ssl
+ports:
+  80/tcp: 80
+  443/tcp: 443
+options:
+  domain: null
+  ssl_cert_file: fullchain.pem
+  ssl_key_file: privkey.pem
+  hsts_header: max-age=31536000; includeSubDomains
+  oidc_metadata_url: null
+  oidc_client_id: null
+  oidc_client_secret: null
+  oidc_scope: openid
+  oidc_redirect_uri: null
+  oidc_inactivity_timeout: 3600
+schema:
+  domain: str
+  ssl_cert_file: str
+  ssl_key_file: str
+  hsts_header: str?
+  oidc_metadata_url: url
+  oidc_client_id: str
+  oidc_client_secret: password
+  oidc_scope: str
+  oidc_redirect_uri: url
+  oidc_inactivity_timeout: int
