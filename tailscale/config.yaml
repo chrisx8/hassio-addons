@@ -1,6 +1,7 @@
 name: Tailscale
 version: 1.24.2
 slug: tailscale
+image: "ghcr.io/chrisx8/hassio-addon-tailscale"
 description: Zero config VPN for building secure networks
 url: https://github.com/chrisx8/home-assistant-addons/tree/main/tailscale
 startup: services
