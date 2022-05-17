@@ -12,9 +12,17 @@ arch:
   - armv7
   - i386
 init: false
-hassio_api: true
 privileged:
   - NET_ADMIN
 devices:
   - /dev/net/tun
 host_network: true
+options:
+  accept_dns: false
+  advertise_exit_node: false
+  advertise_routes: []
+schema:
+  accept_dns: bool
+  advertise_exit_node: bool
+  advertise_routes:
+    - str

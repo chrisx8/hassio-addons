@@ -1,0 +1,12 @@
+configuration:
+  accept_dns:
+    name: Accept DNS
+    description: Use Tailscale DNS servers
+  advertise_exit_node:
+    name: Exit Node
+    description: Advertise this Tailscale node as an Exit Node.
+  advertise_routes:
+    name: Subnet Router - Advertise Routes
+    description: >-
+      Advertise this Tailscale node as a Subnet Router. Specify routes using CIDR
+      notation.

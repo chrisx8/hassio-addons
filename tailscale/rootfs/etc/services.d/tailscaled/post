@@ -1,0 +1,39 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Runs after the machine has been logged in into the Tailscale network
+# ==============================================================================
+
+# Load config
+accept_dns=$(bashio::config 'accept_dns')
+advertise_exit_node=$(bashio::config 'advertise_exit_node')
+advertise_routes=$(bashio::config 'advertise_routes')
+
+echo "========================================================================="
+echo "accept_dns = ${accept_dns}"
+echo "advertise_exit_node = ${advertise_exit_node}"
+echo "advertise_routes = ${advertise_routes}"
+echo "========================================================================="
+
+# Wait for socket to be available
+while ! bashio::fs.socket_exists "/var/run/tailscale/tailscaled.sock";
+do
+  sleep 1
+done
+
+# Wait for the network to be available and logged in
+while true;
+do
+  if /opt/tailscale status --json --peers=false --self=false \
+    | jq --exit-status '.BackendState == "Running" or .BackendState == "NeedsLogin"';
+  then
+    IFS=","
+    /opt/tailscale up \
+      --hostname "$(bashio::info.hostname)" \
+      --accept-dns="${accept_dns}" \
+      --advertise-exit-node="${advertise_exit_node}" \
+      --advertise-routes "${advertise_routes}"
+    bashio::exit.ok
+  fi
+  # Well... wait a bit more
+  sleep 2
+done
