@@ -10,3 +10,6 @@ labels:
     Apache web server and reverse proxy with support for OpenID Connect authentication, powered by mod-auth-openidc.
   org.opencontainers.image.source: "https://github.com/chrisx8/home-assistant-addons/tree/main/apache-oidc"
   org.opencontainers.image.licenses: "MIT License"
+codenotary:
+  base_image: notary@home-assistant.io
+  signer: info+addons@chrisx.xyz

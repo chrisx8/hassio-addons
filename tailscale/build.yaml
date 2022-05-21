@@ -9,3 +9,6 @@ labels:
   org.opencontainers.image.description: "Zero config VPN for building secure networks."
   org.opencontainers.image.source: "https://github.com/chrisx8/home-assistant-addons/tree/main/tailscale"
   org.opencontainers.image.licenses: "MIT License"
+codenotary:
+  base_image: notary@home-assistant.io
+  signer: info+addons@chrisx.xyz
