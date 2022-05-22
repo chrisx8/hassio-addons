@@ -4,6 +4,7 @@ slug: tailscale
 image: "ghcr.io/chrisx8/hassio-tailscale-{arch}"
 description: Zero config VPN for building secure networks
 url: https://github.com/chrisx8/home-assistant-addons/tree/main/tailscale
+codenotary: info+addons@chrisx.xyz
 startup: services
 panel_icon: mdi:vpn
 arch:
