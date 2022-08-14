@@ -1,0 +1,4 @@
+configuration:
+  token:
+    name: cloudflared token
+    description: Get this token from the Cloudflare Zero Trust dashboard.
