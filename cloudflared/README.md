@@ -6,6 +6,6 @@
 
 ## License
 
-[MIT License](https://github.com/chrisx8/home-assistant-addons/blob/main/cloudflared/LICENSE)
+[MIT License](https://github.com/chrisx8/hassio-addons/blob/main/cloudflared/LICENSE)
 
 Copyright (c) 2022 Chris Xiao

@@ -3,7 +3,7 @@ version: 2022.8.2
 slug: cloudflared
 image: "ghcr.io/chrisx8/hassio-cloudflared-{arch}"
 description: Cloudflare Tunnel client
-url: https://github.com/chrisx8/home-assistant-addons/tree/main/cloudflared
+url: https://github.com/chrisx8/hassio-addons/tree/main/cloudflared
 codenotary: info+addons@chrisx.xyz
 startup: services
 panel_icon: mdi:cloud

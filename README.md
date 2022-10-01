@@ -1,6 +1,6 @@
 # Chris's Home Assistant Add-ons
 
-[![builder](https://github.com/chrisx8/home-assistant-addons/actions/workflows/build.yaml/badge.svg)](https://github.com/chrisx8/home-assistant-addons/actions/workflows/build.yaml)
+[![builder](https://github.com/chrisx8/hassio-addons/actions/workflows/build.yaml/badge.svg)](https://github.com/chrisx8/hassio-addons/actions/workflows/build.yaml)
 
 This repository contains Home Assistant add-ons maintained by [chrisx8](https://github.com/chrisx8).
 
@@ -8,12 +8,12 @@ This repository contains Home Assistant add-ons maintained by [chrisx8](https://
 
 To add this add-on repository to your Home Assistant instance, click the My Home Assistant button below.
 
-[![Add this add-on repository to your Home Assistant instance](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fchrisx8%2Fhome-assistant-addons.git)
+[![Add this add-on repository to your Home Assistant instance](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fchrisx8%2Fhassio-addons.git)
 
 Alternatively, you may add this repository manually and install add-ons via the *Add-on Store*.
 Use this repository URL:
 ```
-https://github.com/chrisx8/home-assistant-addons.git
+https://github.com/chrisx8/hassio-addons.git
 ```
 
 ## Add-ons in this repository
