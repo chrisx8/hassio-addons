@@ -98,7 +98,7 @@ jobs:
             --docker-hub "ghcr.io/${{ github.repository_owner }}" \
             --addon
       - name: Remove untagged images
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GHCR_DELETE_TOKEN }}
           script: |
