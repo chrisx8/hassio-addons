@@ -40,7 +40,7 @@ jobs:
              echo "::set-output name=build_arch::false";
           fi
       - name: Login to ghcr.io
-        uses: docker/login-action@v2.0.0
+        uses: docker/login-action@v2
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -59,7 +59,7 @@ jobs:
             --docker-hub "ghcr.io/${{ github.repository_owner }}" \
             --addon
       - name: Remove untagged images
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GHCR_DELETE_TOKEN }}
           script: |
