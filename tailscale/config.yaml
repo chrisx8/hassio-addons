@@ -12,7 +12,6 @@ arch:
   - amd64
   - armhf
   - armv7
-  - i386
 init: false
 privileged:
   - NET_ADMIN
