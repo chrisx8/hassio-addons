@@ -1,5 +1,5 @@
 name: cloudflared
-version: 2022.11.1
+version: 2022.12.1
 slug: cloudflared
 image: "ghcr.io/chrisx8/hassio-cloudflared-{arch}"
 description: Cloudflare Tunnel client

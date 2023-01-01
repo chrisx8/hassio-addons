@@ -6,4 +6,4 @@
 
 [MIT License](https://github.com/chrisx8/hassio-addons/blob/main/cloudflared/LICENSE)
 
-Copyright (c) 2022 Chris Xiao
+Copyright (c) 2022-2023 Chris Xiao
