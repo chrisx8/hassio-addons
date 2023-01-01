@@ -19,5 +19,5 @@ by [Franck Nijhof](https://github.com/frenck).
 
 ```
 Copyright (c) 2021-2022 Franck Nijhof
-Copyright (c) 2022 Chris Xiao
+Copyright (c) 2022-2023 Chris Xiao
 ```
