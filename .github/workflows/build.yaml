@@ -17,7 +17,7 @@ jobs:
       changed_addons: ${{ steps.changed_addons.outputs.addons }}
       changed: ${{ steps.changed_addons.outputs.changed }}
     steps:
-      - name: Check out the repository
+      - name: Check out repository
         uses: actions/checkout@v3
       - name: Get changed files
         id: changed_files
@@ -97,16 +97,3 @@ jobs:
             --image "${{ steps.check.outputs.image }}" \
             --docker-hub "ghcr.io/${{ github.repository_owner }}" \
             --addon
-      - name: Remove untagged images
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GHCR_DELETE_TOKEN }}
-          script: |
-            const response = await github.request("GET /user/packages/container/hassio-${{ matrix.addon }}-${{ matrix.arch }}/versions");
-            for(version of response.data) {
-                if (version.metadata.container.tags.length == 0) {
-                    const deleteResponse = await github.request("DELETE /user/packages/container/hassio-${{ matrix.addon }}-${{ matrix.arch }}/versions/" + version.id, { });
-                    console.log("[status] " + deleteResponse.status);
-                    console.log("Deleted version " + version.id);
-                }
-            }
