@@ -1,7 +1,7 @@
 ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
-ARG MOD_AUTH_OPENIDC_VERSION="v2.4.12.2"
+ARG MOD_AUTH_OPENIDC_VERSION="v2.4.12.3"
 
 RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     sed -i "s/v3\.16/edge/g" /etc/apk/repositories && \

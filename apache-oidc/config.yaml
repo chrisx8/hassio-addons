@@ -1,5 +1,5 @@
 name: Apache with mod-auth-openidc
-version: 2022.12.0
+version: 2023.1.0
 slug: apache-oidc
 image: "ghcr.io/chrisx8/hassio-apache-oidc-{arch}"
 description: Apache web server & reverse proxy with mod-auth-openidc
