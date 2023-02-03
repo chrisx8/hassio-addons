@@ -1,6 +1,9 @@
 name: builder (rebuild all)
 on:
   workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
 jobs:
   init:
     runs-on: ubuntu-latest
