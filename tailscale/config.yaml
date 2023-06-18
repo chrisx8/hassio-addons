@@ -4,13 +4,11 @@ slug: tailscale
 image: "ghcr.io/chrisx8/hassio-tailscale-{arch}"
 description: Zero config VPN for building secure networks
 url: https://github.com/chrisx8/hassio-addons/tree/main/tailscale
-codenotary: info+addons@chrisx.xyz
 startup: services
 panel_icon: mdi:vpn
 arch:
   - aarch64
   - amd64
-  - armhf
   - armv7
 init: false
 privileged:
