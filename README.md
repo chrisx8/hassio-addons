@@ -18,13 +18,6 @@ https://github.com/chrisx8/hassio-addons.git
 
 ## Add-ons in this repository
 
-### [Apache with OpenID Connect](apache-oidc/)
-
-[![Show the "Apache with OpenID Connect" add-on in your Home Assistant instance](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=f5c7bb41_apache-oidc&repository_url=https%3A%2F%2Fgithub.com%2Fchrisx8%2Fhassio-addons)
-
-Apache web server and reverse proxy with support for OpenID Connect authentication,
-powered by [`mod-auth-openidc`](https://github.com/zmartzone/mod_auth_openidc).
-
 ### [cloudflared](cloudflared/)
 
 [![Show the cloudflared add-on in your Home Assistant instance](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=f5c7bb41_cloudflared&repository_url=https%3A%2F%2Fgithub.com%2Fchrisx8%2Fhassio-addons)
@@ -38,6 +31,4 @@ powered by [`mod-auth-openidc`](https://github.com/zmartzone/mod_auth_openidc).
 [Tailscale](https://tailscale.com) is a zero config VPN, which installs on any device in minutes,
 including your Home Assistant instance.
 
-Create a secure network between your servers, computers, and cloud instances.
-Even when separated by firewalls or subnets, Tailscale just works. Tailscale
-manages firewall rules for you, and works from anywhere you are.
+Create a secure network between your servers, computers, and cloud instances. Even when separated by firewalls or subnets, Tailscale just works. Tailscale manages firewall rules for you, and works from anywhere you are.
