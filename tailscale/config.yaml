@@ -1,5 +1,5 @@
 name: Tailscale
-version: 1.44.2
+version: 1.46.0
 slug: tailscale
 image: "ghcr.io/chrisx8/hassio-tailscale-{arch}"
 description: Zero config VPN for building secure networks
