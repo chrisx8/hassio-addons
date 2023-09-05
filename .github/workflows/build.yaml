@@ -18,7 +18,7 @@ jobs:
       changed: ${{ steps.changed_addons.outputs.changed }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Get changed files
         id: changed_files
         uses: Ana06/get-changed-files@v2.2.0
@@ -59,7 +59,7 @@ jobs:
         arch: ["aarch64", "amd64", "armv7"]
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Get information
         id: info
         uses: home-assistant/actions/helpers/info@master
