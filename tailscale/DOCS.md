@@ -23,8 +23,8 @@ from their interface.
 
 <https://login.tailscale.com/>
 
-The add-on can expose "Subnet Router" and "Exit Node" capabilities that you can 
-configure from add-on configuration and your Tailscale account. 
+The add-on can expose "Subnet Router" and "Exit Node" capabilities that you can
+configure from add-on configuration and your Tailscale account.
 
 ```yaml
 accept_dns: false
@@ -39,14 +39,14 @@ Use Tailscale DNS on Home Assistant host.
 
 ### Option: `advertise_exit_node`
 
-Advertise the "Exit Node" capability. It still needs to be enabled in your 
+Advertise the "Exit Node" capability. It still needs to be enabled in your
 Tailscale account.
 
 Tailscale docs: <https://tailscale.com/kb/1103/exit-nodes/>
 
 ### Option: `advertise_routes`
 
-Specify routes to enable the "Subnet Router" capability. Routes should be 
+Specify routes to enable the "Subnet Router" capability. Routes should be
 specified in CIDR notation (`address/mask`, like `192.168.0.0/24`).
 
 Additionally, you need to enable specific subnet routes in your Tailscale account.

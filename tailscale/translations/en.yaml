@@ -1,3 +1,4 @@
+---
 configuration:
   accept_dns:
     name: Accept DNS

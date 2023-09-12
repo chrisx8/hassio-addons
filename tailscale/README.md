@@ -9,8 +9,8 @@ manages firewall rules for you, and works from anywhere you are.
 
 ## Credits
 
-This add-on is based on the 
-[Tailscale community add-on](https://github.com/hassio-addons/addon-tailscale) 
+This add-on is based on the
+[Tailscale community add-on](https://github.com/hassio-addons/addon-tailscale)
 by [Franck Nijhof](https://github.com/frenck).
 
 ## License

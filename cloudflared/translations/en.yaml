@@ -1,3 +1,4 @@
+---
 configuration:
   token:
     name: cloudflared token
