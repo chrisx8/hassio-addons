@@ -4,6 +4,8 @@
 
 This repository contains Home Assistant add-ons maintained by [chrisx8](https://github.com/chrisx8).
 
+Add-ons in this repository supports the `amd64` and `aarch64` architectures.
+
 ## Add this repository to Home Assistant
 
 To add this add-on repository to your Home Assistant instance, click the My Home Assistant button below.
