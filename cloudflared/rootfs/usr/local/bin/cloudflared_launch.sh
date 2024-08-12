@@ -4,4 +4,4 @@
 token=$(bashio::config 'token')
 
 echo "Launching cloudflared..."
-/usr/local/bin/cloudflared tunnel run --token "$token"
+exec /usr/local/bin/cloudflared tunnel run --token "$token"

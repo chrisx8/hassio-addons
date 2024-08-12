@@ -10,12 +10,12 @@ panel_icon: mdi:vpn
 arch:
   - aarch64
   - amd64
-init: false
-privileged:
-  - NET_ADMIN
 devices:
   - /dev/net/tun
 host_network: true
+init: false
+privileged:
+  - NET_ADMIN
 options:
   accept_dns: false
   advertise_exit_node: false
