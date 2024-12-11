@@ -2,8 +2,8 @@
 name: builder
 env:
   BUILD_ARGS: ""
-  MONITORED_FILES: "build.yaml config.yaml Dockerfile rootfs"
-on:
+  MONITORED_FILES: build.yaml config.yaml Dockerfile rootfs
+on: # yamllint disable-line rule:truthy
   push:
     branches:
       - main
@@ -57,7 +57,9 @@ jobs:
     strategy:
       matrix:
         addon: ${{ fromJson(needs.init.outputs.changed_addons) }}
-        arch: ["aarch64", "amd64"]
+        arch:
+          - aarch64
+          - amd64
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -65,7 +67,7 @@ jobs:
         id: info
         uses: home-assistant/actions/helpers/info@master
         with:
-          path: "./${{ matrix.addon }}"
+          path: ./${{ matrix.addon }}
       - name: Check if add-on should be built
         id: check
         run: |
