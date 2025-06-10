@@ -22,6 +22,6 @@ repos:
       - id: destroyed-symlinks
       - id: mixed-line-ending
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.37.0
+    rev: v1.37.1
     hooks:
       - id: yamllint
