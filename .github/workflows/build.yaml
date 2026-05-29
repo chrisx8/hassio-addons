@@ -23,7 +23,10 @@ jobs:
 
       - name: Get changed files
         id: changed_files
-        uses: Ana06/get-changed-files@v2.3.0
+        run: |
+          files=$(git diff --name-only \
+            ${{ github.event.before }} ${{ github.event.after }} | tr '\n' ' ')
+          echo "all=$files" >> "$GITHUB_OUTPUT"
 
       - name: Find add-on directories
         id: addons
