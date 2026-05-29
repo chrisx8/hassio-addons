@@ -24,6 +24,7 @@ jobs:
       - name: Get changed files
         id: changed_files
         run: |
+          git fetch --depth=1 origin ${{ github.event.before }}
           files=$(git diff --name-only \
             ${{ github.event.before }} ${{ github.event.after }} | tr '\n' ' ')
           echo "all=$files" >> "$GITHUB_OUTPUT"
