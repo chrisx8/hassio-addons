@@ -95,7 +95,7 @@ jobs:
   manifest:
     needs: [init, build]
     runs-on: ubuntu-latest
-    name: Push multi-arch manifest ${{ matrix.addon }}
+    name: Push manifest for ${{ matrix.addon }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.init.outputs.manifest_matrix) }}
