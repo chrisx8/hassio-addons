@@ -1,8 +1,7 @@
 ---
 name: builder
 env:
-  BUILD_ARGS: ""
-  MONITORED_FILES: build.yaml config.yaml Dockerfile rootfs
+  MONITORED_FILES: config.yaml Dockerfile rootfs
 on: # yamllint disable-line rule:truthy
   push:
     branches:
@@ -15,84 +14,131 @@ jobs:
     runs-on: ubuntu-latest
     name: Initialize builds
     outputs:
-      changed_addons: ${{ steps.changed_addons.outputs.addons }}
-      changed: ${{ steps.changed_addons.outputs.changed }}
+      build_matrix: ${{ steps.matrix.outputs.build_matrix }}
+      manifest_matrix: ${{ steps.matrix.outputs.manifest_matrix }}
+      changed: ${{ steps.matrix.outputs.changed }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
+
       - name: Get changed files
         id: changed_files
         uses: Ana06/get-changed-files@v2.3.0
+
       - name: Find add-on directories
         id: addons
         uses: home-assistant/actions/helpers/find-addons@master
-      - name: Get changed add-ons
-        id: changed_addons
+
+      - name: Build matrices
+        id: matrix
         run: |
-          declare -a changed_addons
+          declare -a build_entries
+          declare -a manifest_entries
+
           for addon in ${{ steps.addons.outputs.addons }}; do
             if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon ]]; then
+              monitored_changed=false
               for file in ${{ env.MONITORED_FILES }}; do
-                  if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon/$file ]]; then
-                    if [[ ! "${changed_addons[@]}" =~ $addon ]]; then
-                      changed_addons+=("\"${addon}\",");
-                    fi
-                  fi
+                if [[ "${{ steps.changed_files.outputs.all }}" =~ $addon/$file ]]; then
+                  monitored_changed=true
+                  break
+                fi
               done
+              if [[ "$monitored_changed" != "true" ]]; then
+                continue
+              fi
+            else
+              continue
             fi
+
+            version=$(yq '.version' "${addon}/config.yaml")
+            image=$(yq '.image' "${addon}/config.yaml")
+            registry_prefix=$(echo "$image" | cut -d'/' -f1-2)
+            image_name=$(echo "$image" | cut -d'/' -f3)
+            architectures=$(yq -o=json '.arch[]' "${addon}/config.yaml" | jq -sc '.')
+
+            for arch in $(echo "$architectures" | jq -r '.[]'); do
+              case "$arch" in
+                amd64) os="ubuntu-24.04" ;;
+                aarch64) os="ubuntu-24.04-arm" ;;
+                *)
+                  echo "::error::Unsupported architecture: ${arch}"
+                  exit 1
+                  ;;
+              esac
+              entry=$(jq -cn \
+                --arg addon "$addon" \
+                --arg arch "$arch" \
+                --arg os "$os" \
+                --arg image "${registry_prefix}/${arch}-${image_name}" \
+                --arg version "$version" \
+                '{addon:$addon,arch:$arch,os:$os,image:$image,version:$version}')
+              build_entries+=("$entry")
+            done
+
+            entry=$(jq -cn \
+              --arg addon "$addon" \
+              --arg image_name "$image_name" \
+              --arg version "$version" \
+              --arg architectures "$architectures" \
+              '{addon:$addon,image_name:$image_name,version:$version,architectures:$architectures}')
+            manifest_entries+=("$entry")
           done
-          changed=$(echo ${changed_addons[@]} | rev | cut -c 2- | rev)
-          if [[ -n ${changed} ]]; then
-            echo "Changed add-ons: $changed";
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-            echo "addons=[$changed]" >> "$GITHUB_OUTPUT"
+
+          if [[ ${#build_entries[@]} -eq 0 ]]; then
+            echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})"
           else
-            echo "No add-on had any monitored files changed (${{ env.MONITORED_FILES }})";
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            build_json=$(printf '%s,' "${build_entries[@]}")
+            echo "build_matrix={\"include\":[${build_json%,}]}" >> "$GITHUB_OUTPUT"
+            manifest_json=$(printf '%s,' "${manifest_entries[@]}")
+            echo "manifest_matrix={\"include\":[${manifest_json%,}]}" >> "$GITHUB_OUTPUT"
           fi
+
   build:
     needs: init
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     if: needs.init.outputs.changed == 'true'
     name: Build ${{ matrix.addon }} (${{ matrix.arch }})
     strategy:
-      matrix:
-        addon: ${{ fromJson(needs.init.outputs.changed_addons) }}
-        arch:
-          - aarch64
-          - amd64
+      fail-fast: false
+      matrix: ${{ fromJson(needs.init.outputs.build_matrix) }}
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
-      - name: Get information
-        id: info
-        uses: home-assistant/actions/helpers/info@master
+
+      - name: Build image
+        uses: home-assistant/builder/actions/build-image@2026.03.2
         with:
-          path: ./${{ matrix.addon }}
-      - name: Check if add-on should be built
-        id: check
-        run: |
-          if [[ "${{ steps.info.outputs.architectures }}" =~ ${{ matrix.arch }} ]]; then
-            echo "build_arch=true" >> "$GITHUB_OUTPUT"
-            echo "image=$(echo ${{ steps.info.outputs.image }} | cut -d'/' -f3)" >> "$GITHUB_OUTPUT"
-           else
-            echo "${{ matrix.arch }} is not a valid arch for ${{ matrix.addon }}, skipping build";
-            echo "build_arch=false" >> "$GITHUB_OUTPUT"
-          fi
-      - name: Login to ghcr.io
-        if: env.BUILD_ARGS != '--test'
-        uses: docker/login-action@v4
+          arch: ${{ matrix.arch }}
+          context: ./${{ matrix.addon }}
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
+          cosign: "false"
+          image: ${{ matrix.image }}
+          image-tags: ${{ matrix.version }}
+          push: "true"
+          version: ${{ matrix.version }}
+
+  manifest:
+    needs: [init, build]
+    runs-on: ubuntu-latest
+    if: needs.init.outputs.changed == 'true'
+    name: Push manifest for ${{ matrix.addon }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.init.outputs.manifest_matrix) }}
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Publish multi-arch manifest
+        uses: home-assistant/builder/actions/publish-multi-arch-manifest@2026.03.2
         with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build ${{ matrix.addon }} add-on
-        if: steps.check.outputs.build_arch == 'true'
-        uses: home-assistant/builder@2026.02.1
-        with:
-          args: |
-            ${{ env.BUILD_ARGS }} \
-            --${{ matrix.arch }} \
-            --target /data/${{ matrix.addon }} \
-            --image "${{ steps.check.outputs.image }}" \
-            --docker-hub "ghcr.io/${{ github.repository_owner }}" \
-            --addon
+          architectures: ${{ matrix.architectures }}
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
+          cosign: "false"
+          image-name: ${{ matrix.image_name }}
+          image-tags: ${{ matrix.version }}
