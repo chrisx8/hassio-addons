@@ -1,4 +1,4 @@
-ARG BUILD_ARCH
+ARG BUILD_ARCH=amd64
 FROM ghcr.io/home-assistant/${BUILD_ARCH}-base:latest
 
 ARG BUILD_ARCH
