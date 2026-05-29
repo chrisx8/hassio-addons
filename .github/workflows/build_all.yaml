@@ -56,7 +56,7 @@ jobs:
               --arg addon "$addon" \
               --arg image_name "$image_name" \
               --arg version "$version" \
-              --argjson architectures "$architectures" \
+              --arg architectures "$(echo "$architectures" | jq -r '. | join(",")')" \
               '{addon:$addon,image_name:$image_name,version:$version,architectures:$architectures}')
             manifest_entries+=("$entry")
           done
