@@ -31,7 +31,7 @@ jobs:
             image=$(yq '.image' "${addon}/config.yaml")
             registry_prefix=$(echo "$image" | cut -d'/' -f1-2)
             image_name=$(echo "$image" | cut -d'/' -f3)
-            architectures=$(yq -o=json '.arch[]' "${addon}/config.yaml" | jq -s '.')
+            architectures=$(yq -o=json '.arch[]' "${addon}/config.yaml" | jq -sc '.')
 
             for arch in $(echo "$architectures" | jq -r '.[]'); do
               case "$arch" in
@@ -42,7 +42,7 @@ jobs:
                   exit 1
                   ;;
               esac
-              entry=$(jq -n \
+              entry=$(jq -cn \
                 --arg addon "$addon" \
                 --arg arch "$arch" \
                 --arg os "$os" \
@@ -52,7 +52,7 @@ jobs:
               build_entries+=("$entry")
             done
 
-            entry=$(jq -n \
+            entry=$(jq -cn \
               --arg addon "$addon" \
               --arg image_name "$image_name" \
               --arg version "$version" \
