@@ -14,7 +14,7 @@ jobs:
       manifest_matrix: ${{ steps.matrix.outputs.manifest_matrix }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Find add-on directories
         id: addons
@@ -78,7 +78,7 @@ jobs:
       packages: write
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Build image
         uses: home-assistant/builder/actions/build-image@2026.06.0
