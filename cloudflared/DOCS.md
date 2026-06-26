@@ -1,4 +1,4 @@
-# Home Assistant Add-on: cloudflared
+# Home Assistant App: cloudflared
 
 [cloudflared](https://github.com/cloudflare/cloudflared) is the Cloudflare Tunnel client. This contains the command-line client for Cloudflare Tunnel and a tunneling daemon that proxies traffic from the Cloudflare network to your origins. The daemon sits between Cloudflare network and your origin (e.g. a webserver).
 
@@ -10,7 +10,7 @@ You need to have a Cloudflare account with an active Cloudflare Zero Trust (free
 
 You should configure your Cloudflare Tunnel with the Cloudflare Zero Trust dashboard.
 
-When you create a tunnel, the dashboard will give you a token. This token needs to be placed in this add-on's config.
+When you create a tunnel, the dashboard will give you a token. This token needs to be placed in this app's config.
 
 ```yaml
 token: super_secret_token

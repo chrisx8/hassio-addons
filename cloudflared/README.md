@@ -1,4 +1,4 @@
-# Home Assistant Add-on: cloudflared
+# Home Assistant App: cloudflared
 
 [cloudflared](https://github.com/cloudflare/cloudflared) is the Cloudflare Tunnel client. This contains the command-line client for Cloudflare Tunnel and a tunneling daemon that proxies traffic from the Cloudflare network to your origins. The daemon sits between Cloudflare network and your origin (e.g. a webserver).
 

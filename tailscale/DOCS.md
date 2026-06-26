@@ -1,11 +1,11 @@
-# Home Assistant Add-on: Tailscale
+# Home Assistant App: Tailscale
 
 Tailscale is a zero config VPN, which installs on any device in minutes,
 including your Home Assistant instance.
 
 ## Prerequisites
 
-In order to use this add-on, you'll need a Tailscale account.
+In order to use this app, you'll need a Tailscale account.
 
 It is free to use for personal & hobby projects, up to 20 clients/devices on a
 single user account. Sign up using your Google, Microsoft or GitHub account at
@@ -13,7 +13,7 @@ the following URL:
 
 <https://login.tailscale.com/start>
 
-You can also create an account during the add-on installation processes,
+You can also create an account during the app installation processes,
 however, it is nice to know where you need to go later on.
 
 ## Configuration
@@ -23,8 +23,8 @@ from their interface.
 
 <https://login.tailscale.com/>
 
-The add-on can expose "Subnet Router" and "Exit Node" capabilities that you can
-configure from add-on configuration and your Tailscale account.
+The app can expose "Subnet Router" and "Exit Node" capabilities that you can
+configure from App configuration and your Tailscale account.
 
 ```yaml
 accept_dns: false

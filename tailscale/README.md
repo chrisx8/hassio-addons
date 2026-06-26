@@ -1,4 +1,4 @@
-# Home Assistant Add-on: Tailscale
+# Home Assistant App: Tailscale
 
 Tailscale is a zero config VPN, which installs on any device in minutes,
 including your Home Assistant instance.
@@ -9,8 +9,8 @@ manages firewall rules for you, and works from anywhere you are.
 
 ## Credits
 
-This add-on is based on the
-[Tailscale community add-on](https://github.com/hassio-addons/addon-tailscale)
+This app is based on the
+[Tailscale community app](https://github.com/hassio-addons/addon-tailscale)
 by [Franck Nijhof](https://github.com/frenck).
 
 ## License

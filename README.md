@@ -1,32 +1,32 @@
-# Chris's Home Assistant Add-ons
+# Chris's Home Assistant Apps
 
-This repository contains Home Assistant add-ons maintained by [chrisx8](https://github.com/chrisx8).
+This repository contains Home Assistant apps maintained by [chrisx8](https://github.com/chrisx8).
 
-Add-ons in this repository supports the `amd64` and `aarch64` architectures.
+Apps in this repository supports the `amd64` and `aarch64` architectures.
 
 ## Add this repository to Home Assistant
 
-To add this add-on repository to your Home Assistant instance, click the My Home Assistant button below.
+To add this app repository to your Home Assistant instance, click the My Home Assistant button below.
 
-[![Add this add-on repository to your Home Assistant instance](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fchrisx8%2Fhassio-addons)
+[![Add this app repository to your Home Assistant instance](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fchrisx8%2Fhassio-addons)
 
-Alternatively, you may add this repository manually and install add-ons via the *Add-on Store*.
+Alternatively, you may add this repository manually and install apps via the *App store*.
 Use this repository URL:
 ```
-https://github.com/chrisx8/hassio-addons.git
+https://github.com/chrisx8/hassio-addons
 ```
 
-## Add-ons in this repository
+## Apps in this repository
 
 ### [cloudflared](cloudflared/)
 
-[![Show the cloudflared add-on in your Home Assistant instance](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=f5c7bb41_cloudflared&repository_url=https%3A%2F%2Fgithub.com%2Fchrisx8%2Fhassio-addons)
+[![Show the cloudflared app in your Home Assistant instance](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=f5c7bb41_cloudflared&repository_url=https%3A%2F%2Fgithub.com%2Fchrisx8%2Fhassio-addons)
 
 [cloudflared](https://github.com/cloudflare/cloudflared) is the Cloudflare Tunnel client. This contains the command-line client for Cloudflare Tunnel and a tunneling daemon that proxies traffic from the Cloudflare network to your origins. The daemon sits between Cloudflare network and your origin (e.g. a webserver).
 
 ### [Tailscale](tailscale/)
 
-[![Show the Tailscale add-on in your Home Assistant instance](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=f5c7bb41_tailscale&repository_url=https%3A%2F%2Fgithub.com%2Fchrisx8%2Fhassio-addons)
+[![Show the Tailscale app in your Home Assistant instance](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=f5c7bb41_tailscale&repository_url=https%3A%2F%2Fgithub.com%2Fchrisx8%2Fhassio-addons)
 
 [Tailscale](https://tailscale.com) is a zero config VPN, which installs on any device in minutes,
 including your Home Assistant instance.
