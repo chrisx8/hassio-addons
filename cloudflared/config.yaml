@@ -1,6 +1,6 @@
 ---
 name: cloudflared
-version: 2026.7.1
+version: 2026.7.2
 slug: cloudflared
 image: ghcr.io/chrisx8/hassio-cloudflared
 description: Cloudflare Tunnel client
