@@ -111,3 +111,29 @@ jobs:
           cosign: "false"
           image-name: ${{ matrix.image_name }}
           image-tags: ${{ matrix.version }}
+
+      - name: Delete per-arch images
+        uses: actions/github-script@v9
+        env:
+          IMAGE_NAME: ${{ matrix.image_name }}
+          ARCHITECTURES: ${{ matrix.architectures }}
+        with:
+          script: |
+            const architectures = JSON.parse(process.env.ARCHITECTURES);
+            for (const arch of architectures) {
+              const packageName = `${arch}-${process.env.IMAGE_NAME}`;
+              try {
+                await github.rest.packages.deletePackageForUser({
+                  package_type: "container",
+                  package_name: packageName,
+                  username: context.repo.owner,
+                });
+                core.info(`Deleted ${packageName}`);
+              } catch (error) {
+                if (error.status === 404) {
+                  core.info(`Package ${packageName} not found, skipping`);
+                } else {
+                  throw error;
+                }
+              }
+            }
