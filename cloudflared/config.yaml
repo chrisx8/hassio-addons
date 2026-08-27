@@ -12,6 +12,8 @@ arch:
   - amd64
 init: false
 options:
+  edge_ip_version: auto
   token: ""
 schema:
+  edge_ip_version: list(auto|4|6)
   token: str

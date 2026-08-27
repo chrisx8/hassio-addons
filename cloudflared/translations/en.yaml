@@ -1,5 +1,9 @@
 ---
 configuration:
+  edge_ip_version:
+    name: Edge IP version
+    description: >-
+      IP address version (IPv4 or IPv6) used to establish connection between cloudflared and the Cloudflare network.
   token:
     name: cloudflared token
     description: Get this token from the Cloudflare Zero Trust dashboard.
