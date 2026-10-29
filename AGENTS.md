@@ -22,6 +22,13 @@ yamllint rules: every YAML file starts with `---`, max line length 120, double q
 
 To update an app to a new upstream release, change only the `version:` line in `<app>/config.yaml`. Commit message convention: `<app> <version>`, comma-separated for multiple.
 
+## Automated Version Updates
+
+Hosted Renovate (`renovate.json`) opens version-bump PRs for each app, manual merge. Dependabot handles GitHub Actions.
+
+- New apps: add a custom regex manager scoped to `<app>/config.yaml`, with the upstream release repository and stable-version filtering.
+- Closing a PR skips that version. To retry, restore its branch and reopen, or rename the closed PR to allow recreation.
+
 ## CI (.github/workflows/)
 
 - `build.yaml`: on push to `main`, rebuilds an app only if its `config.yaml`, `Dockerfile`, or `rootfs/` changed (`MONITORED_FILES`). Builds per-arch images (`ghcr.io/chrisx8/<arch>-hassio-<app>`) with `home-assistant/builder/actions/build-image`, then publishes a multi-arch manifest; build matrices come from `config.yaml` via `yq`/`jq`.

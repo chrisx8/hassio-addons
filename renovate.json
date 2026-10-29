@@ -1,0 +1,38 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "enabledManagers": ["custom.regex"],
+  "automerge": false,
+  "dependencyDashboard": false,
+  "recreateWhen": "auto",
+  "separateMajorMinor": false,
+  "semanticCommits": "disabled",
+  "commitMessagePrefix": "",
+  "commitMessageAction": "",
+  "commitMessageTopic": "{{{depName}}}",
+  "commitMessageExtra": "{{{newValue}}}",
+  "commitMessageSuffix": "",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update cloudflared release",
+      "managerFilePatterns": ["/^cloudflared/config\\.yaml$/"],
+      "matchStrings": ["\\nversion: (?<currentValue>\\d+\\.\\d+\\.\\d+)\\n"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "cloudflared",
+      "extractVersionTemplate": "^(?<version>\\d+\\.\\d+\\.\\d+)$",
+      "packageNameTemplate": "cloudflare/cloudflared",
+      "versioningTemplate": "semver"
+    },
+    {
+      "customType": "regex",
+      "description": "Update Tailscale stable release",
+      "managerFilePatterns": ["/^tailscale/config\\.yaml$/"],
+      "matchStrings": ["\\nversion: (?<currentValue>\\d+\\.\\d+\\.\\d+)\\n"],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "tailscale",
+      "extractVersionTemplate": "^v(?<version>\\d+\\.\\d*[02468]\\.\\d+)$",
+      "packageNameTemplate": "tailscale/tailscale",
+      "versioningTemplate": "semver"
+    }
+  ]
+}
