@@ -19,7 +19,7 @@ jobs:
       changed: ${{ steps.matrix.outputs.changed }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
 
       - name: Get changed files
         id: changed_files
@@ -112,7 +112,7 @@ jobs:
       packages: write
     steps:
       - name: Check out repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v7.0.1
 
       - name: Build image
         uses: home-assistant/builder/actions/build-image@2026.09.0
@@ -148,7 +148,7 @@ jobs:
           image-tags: ${{ matrix.version }}
 
       - name: Delete per-arch images
-        uses: actions/github-script@v9
+        uses: actions/github-script@v9.0.0
         env:
           IMAGE_NAME: ${{ matrix.image_name }}
           ARCHITECTURES: ${{ matrix.architectures }}
